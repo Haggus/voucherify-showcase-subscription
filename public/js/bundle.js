@@ -91,20 +91,20 @@
 	                _react2.default.createElement(
 	                    'h2',
 	                    null,
-	                    'This is a store item'
+	                    this.props.data.name
 	                ),
-	                _react2.default.createElement('img', { src: '/' }),
+	                _react2.default.createElement('img', { className: 'img-responsive', src: this.props.data.img }),
 	                _react2.default.createElement(
 	                    'p',
 	                    null,
-	                    'This is an item description. This is an item description. This is an item description.'
+	                    this.props.data.desc
 	                ),
 	                _react2.default.createElement(
 	                    'p',
 	                    null,
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
-	                        { to: this.props.orderLink, className: 'btn btn-primary' },
+	                        { to: this.props.data.link, className: 'btn btn-primary' },
 	                        'Order'
 	                    )
 	                )
@@ -127,12 +127,29 @@
 	    _createClass(StoreList, [{
 	        key: 'render',
 	        value: function render() {
+	            var items = [{
+	                name: 'A box of strawberries',
+	                img: 'img/strawberries.jpg',
+	                desc: 'A tasty box of strawberries, straight from sunny California!',
+	                link: '/order/1'
+	            }, {
+	                name: 'A box of grapes',
+	                img: 'img/grapes.jpg',
+	                desc: 'A tasty box of grapes, straight from sunny California!',
+	                link: '/order/2'
+	            }, {
+	                name: 'A box of raspberries',
+	                img: 'img/raspberries.jpg',
+	                desc: 'A tasty box of raspberries, straight from sunny California!',
+	                link: '/order/3'
+	            }];
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'row' },
-	                _react2.default.createElement(StoreItem, { orderLink: '/order/1' }),
-	                _react2.default.createElement(StoreItem, { orderLink: '/order/2' }),
-	                _react2.default.createElement(StoreItem, { orderLink: '/order/3' })
+	                items.map(function (item) {
+	                    return _react2.default.createElement(StoreItem, { data: item });
+	                })
 	            );
 	        }
 	    }]);
@@ -158,7 +175,7 @@
 	                _react2.default.createElement(
 	                    'h3',
 	                    null,
-	                    'Store'
+	                    'Example Store'
 	                ),
 	                _react2.default.createElement(StoreList, null)
 	            );
@@ -181,9 +198,13 @@
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'h2',
-	                null,
-	                'Here is your order'
+	                'div',
+	                { className: 'container' },
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    'Here is your order'
+	                )
 	            );
 	        }
 	    }]);

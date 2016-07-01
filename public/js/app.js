@@ -10,15 +10,11 @@ class StoreItem extends React.Component {
     render() {
         return(
             <div className="col-xs-4">
-                <h2>This is a store item</h2>
-                <img src="/" />
+                <h2>{this.props.data.name}</h2>
+                <img className="img-responsive" src={this.props.data.img} />
+                <p>{this.props.data.desc}</p>
                 <p>
-                    This is an item description.
-                    This is an item description.
-                    This is an item description.
-                </p>
-                <p>
-                    <Link to={this.props.orderLink} className="btn btn-primary">Order</Link>
+                    <Link to={this.props.data.link} className="btn btn-primary">Order</Link>
                 </p>
             </div>
         );
@@ -27,11 +23,34 @@ class StoreItem extends React.Component {
 
 class StoreList extends React.Component {
     render() {
+        let items = [
+            {
+                name: 'A box of strawberries',
+                img: 'img/strawberries.jpg',
+                desc: 'A tasty box of strawberries, straight from sunny California!',
+                link: '/order/1'
+            },
+            {
+                name: 'A box of grapes',
+                img: 'img/grapes.jpg',
+                desc: 'A tasty box of grapes, straight from sunny California!',
+                link: '/order/2'
+            },
+            {
+                name: 'A box of raspberries',
+                img: 'img/raspberries.jpg',
+                desc: 'A tasty box of raspberries, straight from sunny California!',
+                link: '/order/3'
+            }
+        ];
+
         return(
             <div className="row">
-                <StoreItem orderLink="/order/1" />
-                <StoreItem orderLink="/order/2" />
-                <StoreItem orderLink="/order/3" />
+                {items.map(function(item) {
+                    return (
+                        <StoreItem data={item} />
+                    );
+                })}
             </div>
         );
     }
@@ -41,7 +60,7 @@ class Store extends React.Component {
     render() {
         return(
             <div className="container">
-                <h3>Store</h3>
+                <h3>Example Store</h3>
                 <StoreList />
             </div>
         );
@@ -51,7 +70,9 @@ class Store extends React.Component {
 class Order extends React.Component {
     render() {
         return(
-            <h2>Here is your order</h2>
+            <div className="container">
+                <h3>Here is your order</h3>
+            </div>
         );
     }
 };
