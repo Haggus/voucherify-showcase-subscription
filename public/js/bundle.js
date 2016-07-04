@@ -110,7 +110,7 @@
 	                        _reactRouter.Link,
 	                        { to: '/order/' + this.props.data.id, className: 'btn btn-primary' },
 	                        'Order - ',
-	                        this.props.data.price
+	                        '$' + this.props.data.price
 	                    )
 	                )
 	            );
@@ -187,12 +187,25 @@
 	        var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(Order).call(this, props));
 
 	        _this4.state = {
+	            voucher: '',
 	            item: _api2.default.getStoreItem(_this4.props.params.itemId)
 	        };
 	        return _this4;
 	    }
 
 	    _createClass(Order, [{
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            this.setState({
+	                voucher: event.target.value
+	            });
+	        }
+	    }, {
+	        key: 'checkVoucherCode',
+	        value: function checkVoucherCode(event) {
+	            console.log(this.state.voucher);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -201,12 +214,56 @@
 	                _react2.default.createElement(
 	                    'h3',
 	                    null,
-	                    'Here is your order'
+	                    'Example Store'
 	                ),
 	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    this.state.item.name
+	                    'div',
+	                    { className: 'panel panel-default' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'panel-heading' },
+	                        'Your order'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'panel-body' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'row' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-xs-4' },
+	                                _react2.default.createElement('img', { className: 'img-responsive', src: this.state.item.img })
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-xs-8' },
+	                                _react2.default.createElement(
+	                                    'h4',
+	                                    null,
+	                                    this.state.item.name
+	                                ),
+	                                _react2.default.createElement(
+	                                    'h5',
+	                                    null,
+	                                    this.state.item.desc
+	                                ),
+	                                _react2.default.createElement(
+	                                    'h2',
+	                                    null,
+	                                    '$' + this.state.item.price
+	                                ),
+	                                _react2.default.createElement('hr', null),
+	                                _react2.default.createElement(
+	                                    'h5',
+	                                    null,
+	                                    'Do you have a voucher?'
+	                                ),
+	                                _react2.default.createElement('input', { type: 'text', onChange: this.handleChange.bind(this), value: this.state.voucher, placeholder: 'Voucher code' }),
+	                                _react2.default.createElement('input', { type: 'button', className: 'btn btn-primary', onClick: this.checkVoucherCode.bind(this), value: 'Use Voucher' })
+	                            )
+	                        )
+	                    )
 	                )
 	            );
 	        }
@@ -26106,19 +26163,19 @@
 	    name: 'A box of strawberries',
 	    img: 'img/strawberries.jpg',
 	    desc: 'A tasty box of strawberries, straight from sunny California!',
-	    price: '$5.99'
+	    price: '5.99'
 	}, {
 	    id: '1',
 	    name: 'A box of grapes',
 	    img: 'img/grapes.jpg',
 	    desc: 'A tasty box of grapes, straight from sunny California!',
-	    price: '$7.99'
+	    price: '7.99'
 	}, {
 	    id: '2',
 	    name: 'A box of raspberries',
 	    img: 'img/raspberries.jpg',
 	    desc: 'A tasty box of raspberries, straight from sunny California!',
-	    price: '$19.99'
+	    price: '19.99'
 	}];
 
 	var Api = {

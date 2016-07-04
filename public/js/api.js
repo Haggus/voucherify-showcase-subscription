@@ -4,21 +4,21 @@ let storeItems = [
         name: 'A box of strawberries',
         img: 'img/strawberries.jpg',
         desc: 'A tasty box of strawberries, straight from sunny California!',
-        price: '$5.99'
+        price: '5.99'
     },
     {
         id: '1',
         name: 'A box of grapes',
         img: 'img/grapes.jpg',
         desc: 'A tasty box of grapes, straight from sunny California!',
-        price: '$7.99'
+        price: '7.99'
     },
     {
         id: '2',
         name: 'A box of raspberries',
         img: 'img/raspberries.jpg',
         desc: 'A tasty box of raspberries, straight from sunny California!',
-        price: '$19.99'
+        price: '19.99'
     }
 ];
 
