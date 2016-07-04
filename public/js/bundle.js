@@ -276,7 +276,7 @@
 
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
-	    null,
+	    { history: _reactRouter.hashHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: Store }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/order/:itemId', component: Order }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '*', component: Store })

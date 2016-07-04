@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Link, Route} from 'react-router';
+import {Router, Link, Route, hashHistory} from 'react-router';
 
 import StoreAPI from './api';
 
@@ -103,7 +103,7 @@ class Order extends React.Component {
 };
 
 ReactDOM.render(
-    <Router>
+    <Router history={hashHistory}>
         <Route path="/" component={Store} />
         <Route path="/order/:itemId" component={Order} />
         <Route path="*" component={Store} />
