@@ -65,6 +65,10 @@
 
 	var _reactRouter = __webpack_require__(169);
 
+	var _api = __webpack_require__(231);
+
+	var _api2 = _interopRequireDefault(_api);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -104,8 +108,9 @@
 	                    null,
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
-	                        { to: this.props.data.link, className: 'btn btn-primary' },
-	                        'Order'
+	                        { to: '/order/' + this.props.data.id, className: 'btn btn-primary' },
+	                        'Order - ',
+	                        this.props.data.price
 	                    )
 	                )
 	            );
@@ -118,36 +123,24 @@
 	var StoreList = function (_React$Component2) {
 	    _inherits(StoreList, _React$Component2);
 
-	    function StoreList() {
+	    function StoreList(props) {
 	        _classCallCheck(this, StoreList);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(StoreList).apply(this, arguments));
+	        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(StoreList).call(this, props));
+
+	        _this2.state = {
+	            items: _api2.default.getStoreItems()
+	        };
+	        return _this2;
 	    }
 
 	    _createClass(StoreList, [{
 	        key: 'render',
 	        value: function render() {
-	            var items = [{
-	                name: 'A box of strawberries',
-	                img: 'img/strawberries.jpg',
-	                desc: 'A tasty box of strawberries, straight from sunny California!',
-	                link: '/order/1'
-	            }, {
-	                name: 'A box of grapes',
-	                img: 'img/grapes.jpg',
-	                desc: 'A tasty box of grapes, straight from sunny California!',
-	                link: '/order/2'
-	            }, {
-	                name: 'A box of raspberries',
-	                img: 'img/raspberries.jpg',
-	                desc: 'A tasty box of raspberries, straight from sunny California!',
-	                link: '/order/3'
-	            }];
-
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'row' },
-	                items.map(function (item) {
+	                this.state.items.map(function (item) {
 	                    return _react2.default.createElement(StoreItem, { data: item });
 	                })
 	            );
@@ -188,10 +181,15 @@
 	var Order = function (_React$Component4) {
 	    _inherits(Order, _React$Component4);
 
-	    function Order() {
+	    function Order(props) {
 	        _classCallCheck(this, Order);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Order).apply(this, arguments));
+	        var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(Order).call(this, props));
+
+	        _this4.state = {
+	            item: _api2.default.getStoreItem(_this4.props.params.itemId)
+	        };
+	        return _this4;
 	    }
 
 	    _createClass(Order, [{
@@ -204,6 +202,11 @@
 	                    'h3',
 	                    null,
 	                    'Here is your order'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    this.state.item.name
 	                )
 	            );
 	        }
@@ -26088,6 +26091,49 @@
 
 	exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 	module.exports = exports['default'];
+
+/***/ },
+/* 231 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var storeItems = [{
+	    id: '0',
+	    name: 'A box of strawberries',
+	    img: 'img/strawberries.jpg',
+	    desc: 'A tasty box of strawberries, straight from sunny California!',
+	    price: '$5.99'
+	}, {
+	    id: '1',
+	    name: 'A box of grapes',
+	    img: 'img/grapes.jpg',
+	    desc: 'A tasty box of grapes, straight from sunny California!',
+	    price: '$7.99'
+	}, {
+	    id: '2',
+	    name: 'A box of raspberries',
+	    img: 'img/raspberries.jpg',
+	    desc: 'A tasty box of raspberries, straight from sunny California!',
+	    price: '$19.99'
+	}];
+
+	var Api = {
+	    getStoreItems: function getStoreItems() {
+	        return storeItems.slice(0);
+	    },
+
+	    //for simplicity we are returning the index, which also happens to
+	    //be the id.
+	    getStoreItem: function getStoreItem(id) {
+	        return storeItems[id];
+	    }
+	};
+
+	exports.default = Api;
 
 /***/ }
 /******/ ]);

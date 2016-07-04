@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Link, Route} from 'react-router';
 
+import StoreAPI from './api';
+
 class StoreItem extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,7 @@ class StoreItem extends React.Component {
                 <img className="img-responsive" src={this.props.data.img} />
                 <p>{this.props.data.desc}</p>
                 <p>
-                    <Link to={this.props.data.link} className="btn btn-primary">Order</Link>
+                    <Link to={'/order/' + this.props.data.id} className="btn btn-primary">Order - {this.props.data.price}</Link>
                 </p>
             </div>
         );
@@ -22,31 +24,17 @@ class StoreItem extends React.Component {
 }
 
 class StoreList extends React.Component {
-    render() {
-        let items = [
-            {
-                name: 'A box of strawberries',
-                img: 'img/strawberries.jpg',
-                desc: 'A tasty box of strawberries, straight from sunny California!',
-                link: '/order/1'
-            },
-            {
-                name: 'A box of grapes',
-                img: 'img/grapes.jpg',
-                desc: 'A tasty box of grapes, straight from sunny California!',
-                link: '/order/2'
-            },
-            {
-                name: 'A box of raspberries',
-                img: 'img/raspberries.jpg',
-                desc: 'A tasty box of raspberries, straight from sunny California!',
-                link: '/order/3'
-            }
-        ];
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: StoreAPI.getStoreItems()
+        };
+    }
 
+    render() {
         return(
             <div className="row">
-                {items.map(function(item) {
+                {this.state.items.map(function(item) {
                     return (
                         <StoreItem data={item} />
                     );
@@ -68,10 +56,20 @@ class Store extends React.Component {
 }
 
 class Order extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            item: StoreAPI.getStoreItem(this.props.params.itemId)
+        };
+    }
+
     render() {
         return(
             <div className="container">
                 <h3>Here is your order</h3>
+                <p>
+                    {this.state.item.name}
+                </p>
             </div>
         );
     }
